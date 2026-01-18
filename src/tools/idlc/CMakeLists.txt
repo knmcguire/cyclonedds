@@ -34,8 +34,10 @@ endif()
 add_executable(idlc ${sources} ${headers})
 
 if(MSVC)
-  # ignore warnings C6255 and 6263 about _alloca
-  target_compile_options(idlc PRIVATE /wd6255 /wd6263)
+  # ignore warnings C6255 and 6263 about _alloca and C5287 and 5286 about enum type
+  
+
+  target_compile_options(idlc PRIVATE /wd6255 /wd6263 /wd5287 /wd5286)
 endif()
 target_link_libraries(idlc PRIVATE compat idl idlpp ddsc ${CMAKE_DL_LIBS})
 target_include_directories(

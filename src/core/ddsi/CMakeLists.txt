@@ -190,6 +190,11 @@ if(ENABLE_SHM)
   list(APPEND hdrs_private_ddsi ddsi_shm_transport.h)
 endif()
 
+if(MSVC)
+  # ignore warning 5286 and 5287 about enum type conversion
+  target_compile_options(ddsc PRIVATE /wd5286 /wd5287)
+endif()
+
 prepend(hdrs_private_ddsi "${CMAKE_CURRENT_LIST_DIR}/include/dds/ddsi/" ${hdrs_private_ddsi})
 prepend(srcs_ddsi "${CMAKE_CURRENT_LIST_DIR}/src/" ${srcs_ddsi})
 

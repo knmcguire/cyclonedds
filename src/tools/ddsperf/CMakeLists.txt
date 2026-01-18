@@ -14,6 +14,11 @@ if (BUILD_DDSPERF)
   include(Generate)
 
   idlc_generate(TARGET ddsperf_types FILES ddsperf_types.idl WARNINGS no-implicit-extensibility)
+  if(MSVC)
+    # ignore warning 5286 and 5287 about enum type conversion
+    target_compile_options(ddsperf_types INTERFACE /wd5287 /wd5286)
+  endif()
+
   add_executable(ddsperf
     ddsperf.c
     cputime.c cputime.h
